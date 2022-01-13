@@ -8,7 +8,7 @@ abstract class Player extends Character
     protected string $pseudo;
     protected int $level;
 
-    public function __construct(int $id, int $lifePoint, int $speed, int $strength, int $armor, int $faith, int $magic, int $agility, array $skills, string $pseudo)
+    public function __construct(int $id, int $lifePoint, int $speed, int $strength, int $armor, int $faith, int $magic, int $agility, array $skills, string $pseudo = "")
     {
         parent::__construct($id, $lifePoint, $speed, $strength, $armor, $faith, $magic, $agility, $skills);
         $this->pseudo = $pseudo;
@@ -18,6 +18,11 @@ abstract class Player extends Character
     public function getPseudo()
     {
         return $this->pseudo;
+    }
+
+    public function setPseudo($pseudo)
+    {
+        $this->pseudo = $pseudo;
     }
 
     public function getLevel()

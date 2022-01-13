@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+@import url('karacters/thief.css');
+@import url('karacters/wizard.css');
+@import url('karacters/paladin.css');
+
+@import url('pages/select.css');
+@import url('pages/gameplay.css');
+
+* {
+    box-sizing: border-box;
+    font-family: 'VT323', monospace;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
+
+.K {
+    font-weight: bold;
+    font-size: 3em;
+    color: #d90200;
+}

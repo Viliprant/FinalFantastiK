@@ -2,14 +2,16 @@
 
 class Skill
 {
+    private $id;
     private $label;
     private array $type; // array [$faith => 1.1]
     private bool $isMultiTarget;
     private int $coolDown;
     private int $currentCoolDown = 0;
 
-    public function __construct($label, $type, $isMultiTarget, $coolDown)
+    public function __construct(int $id, string $label, array $type, bool $isMultiTarget, int $coolDown)
     {
+        $this->id = $id;
         $this->label = $label;
         $this->type = $type;
         $this->isMultiTarget = $isMultiTarget;
@@ -24,7 +26,10 @@ class Skill
 
         return true;
     }
-
+    public function getId()
+    {
+        return $this->id;
+    }
     public function getTimeleft()
     {
         return $this->coolDown - $this->currentCoolDown;

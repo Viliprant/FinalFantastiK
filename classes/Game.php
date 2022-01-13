@@ -3,28 +3,34 @@ require_once("./classes/Database.php");
 
 class Game
 {
-    private $player;
+    private Player $player;
     private array $enemies;
     private Boss $boss;
     private array $currentEnemies;
-    private array $choicesKaracter;
-    private Character $selectedKaracter;
 
-    public function __construct() {
-        $db = new Database();
-        $db->init();
-        $this->choicesKaracter = $db->getKaracters("Player");
-        $this->enemies = $db->getKaracters("Monster");
-        
-        $this->boss = $db->getKaracters("Boss")[0];
-        // var_dump($karacters);
+    public function __construct($selected, $pseudo)
+    {
+        Database::init();
+        $this->setPlayer(Database::getKaracters("Player"), $selected, $pseudo);
 
-        // $enemy = $this->enemies[array_rand($this->enemies)];
+        $this->enemies = Database::getKaracters("Monster");
+        $this->addToCurrentEnemies($this->enemies[0]);
     }
 
     public function getPlayer()
     {
         return $this->player;
+    }
+
+    public function setPlayer($allKaracters, $selected, $pseudo)
+    {
+        foreach ($allKaracters as $k) {
+            if ($k instanceof $selected) {
+                $this->player = $k;
+            }
+        }
+
+        $this->player->setPseudo($pseudo);
     }
 
     public function getEnemies()

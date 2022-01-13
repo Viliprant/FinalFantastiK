@@ -12,6 +12,7 @@ abstract class Character
     protected int   $faith;
     protected int   $magic;
     protected int   $agility;
+    protected string   $pixelart;
     /** 
      * @var Skill[] $skills
      */
@@ -22,10 +23,14 @@ abstract class Character
     {
         $this->id = $id;
         $this->lifePoint = $lifePoint;
-        $this->speed = $lifePoint;
+        $this->speed = $speed;
         $this->strength = $strength;
         $this->armor = $armor;
         $this->skills = $skills;
+        $this->faith = $faith;
+        $this->magic = $magic;
+        $this->agility = $agility;
+        $this->pixelart = "pixelart-" . get_class($this);
     }
 
     public function attaK(int $damages, Character $enemy)
@@ -45,6 +50,11 @@ abstract class Character
     public function getDamages(int $damages)
     {
         $reducedDamages = $damages - $this->armor;
+
+        if ($reducedDamages < 0) {
+            $reducedDamages = 0;
+        }
+
         $this->lifePoint -= $reducedDamages;
     }
 
@@ -81,5 +91,25 @@ abstract class Character
     public function getAgility()
     {
         return $this->agility;
+    }
+
+    public function getPixelart()
+    {
+        return $this->pixelart;
+    }
+
+    public function getSkills()
+    {
+        return $this->skills;
+    }
+
+    public function setSkills(array $skills)
+    {
+        $this->skills = $skills;
+    }
+
+    public function getId()
+    {
+        return $this->id;
     }
 }
