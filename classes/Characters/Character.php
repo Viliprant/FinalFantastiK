@@ -1,31 +1,61 @@
 <?php
 
-class Character
+require_once(__DIR__ . "/../Skill.php");
+
+abstract class Character
 {
-    private $life_point;
-    private $action_point;
+    protected int   $lifePoint;
+    protected int   $speed;
+    protected int   $strength;
+    protected int   $armor;
+    /** 
+     * @var Skill[] $skills
+     */
+    protected $skills; // Skill
 
-    public function __construct()
+    public function attaK(int $damages, Character $enemy)
     {
+        $enemy->getDamages($damages);
+
+        foreach ($this->skills as $key => $skill) {
+            $skill->reducesTimeLeft();
+        }
     }
 
-    public function AttaK(int $damages, Character $character)
-    {
-        $character->getDamages($damages);
-    }
+    public abstract function useSkill(string $label, array $enemies); // Characters[] enemies
 
     public function getDamages(int $damages)
     {
-        $this->life_point -= $damages;
+        $this->lifePoint -= $damages;
     }
 
-    public function getLife_point()
+    public function punch(Character $enemy)
     {
-        return $this->life_point;
+        $this->attaK($this->getStrength(), $enemy);
     }
 
-    public function getAction_point()
+    public function getStrength()
     {
-        return $this->action_point;
+        return $this->strength;
+    }
+
+    public function getSpeed()
+    {
+        return $this->speed;
+    }
+
+    public function getLifePoint()
+    {
+        return $this->lifePoint;
+    }
+
+    public function getArmor()
+    {
+        return $this->armor;
+    }
+
+    public function getSkills()
+    {
+        return $this->skills;
     }
 }
