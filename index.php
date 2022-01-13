@@ -1,7 +1,8 @@
 <?php
 require_once('classes/Game.php');
+require_once('classes/Database.php');
 
-$game = new Game("Paladin");
+$game = new Game();
 ?>
 
 <!DOCTYPE html>
@@ -20,13 +21,16 @@ $game = new Game("Paladin");
     <div class="game">
 
         <div class="enemies">
-
+            <?php
+            foreach ($game->getCurrentEnemies() as $enemy) {
+            ?> <div class="enemy <?= $enemy->getSprite() ?>"><?= $enemy->getName() ?></div> <?php
+                                                                                            }
+                                                                                                ?>
         </div>
 
         <div class="player">
-
-            <div class="name"><?= $game->getPlayer()->getPseudo() ?> </div>
-            <div class="sprite"></div>
+            <div class="player-name"><?= $game->getPlayer()->getPseudo() ?> </div>
+            <div class="pixelart-medusa"></div>
             <div class="skills">
                 <?php foreach ($game->getPlayer()->getSkills() as $skill) {
                     echo '<div class="skill ' . $skill->isAvailable() . '">' . $skill->getLabel() . '</div>';
@@ -39,7 +43,7 @@ $game = new Game("Paladin");
 
     </div>
 
-    <div class="pixelart-medusa"></div>
+
 
 </body>
 

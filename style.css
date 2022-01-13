@@ -31,3 +31,27 @@
         width: 8px;
     }
 }
+
+
+.enemies{
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.enemy {
+    margin: 2rem;
+}
+
+.player {
+
+    height: 50vh;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+}

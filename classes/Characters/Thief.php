@@ -1,36 +1,17 @@
 <?php
 
+require_once("Player.php");
+
 final class Thief extends Player
 {
-    protected int     $lifePoint = 25;
-    protected int     $speed = 7;
-    protected int     $strength = 3;
-    protected int     $armor = 4;
-
-    protected int     $agility = 7;
-
-    public function __construct($pseudo)
+    public function __construct(int $id, int $lifePoint, int $speed, int $strength, int $armor, int $faith, int $magic, int $agility, array $skills, string $pseudo)
     {
-        parent::__construct($pseudo);
-    }
-
-    public function getDamages(int $damages)
-    {
-        $reducedDamages = $damages - $this->armor;
-        $this->lifePoint -= $reducedDamages;
-    }
-
-    public function getKick()
-    {
-        return $this->kick;
+        parent::__construct($id, $lifePoint, $speed, $strength, $armor, $faith, $magic, $agility, $skills, $pseudo);
     }
 
     public function levelUp()
     {
-        $this->lifePoint += 1;
-        $this->speed += 1;
-        $this->strength += 1;
-        $this->armor += 1;
-        $this->kick += 1;
+        parent::levelUp();
+        $this->agility++;
     }
 }

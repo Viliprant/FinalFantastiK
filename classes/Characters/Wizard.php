@@ -4,33 +4,14 @@ require_once("Player.php");
 
 final class Wizard extends Player
 {
-    protected int       $lifePoint = 15;
-    protected int       $speed = 5;
-    protected int       $strength = 2;
-    protected int       $armor = 1;
-
-    protected int       $magic = 6;
-
-    public function __construct($pseudo)
+    public function __construct(int $id, int $lifePoint, int $speed, int $strength, int $armor, int $faith, int $magic, int $agility, array $skills, string $pseudo)
     {
-        parent::__construct($pseudo);
-    }
-
-    public function getDamages(int $damages)
-    {
-        $reducedDamages = $damages - $this->shield;
-        $this->lifePoint -= $reducedDamages;
-    }
-
-    public function getMagic()
-    {
-        return $this->magic;
+        parent::__construct($id, $lifePoint, $speed, $strength, $armor, $faith, $magic, $agility, $skills, $pseudo);
     }
 
     public function levelUp()
     {
-        $this->lifePoint += 1;
-        $this->speed += 1;
-        $this->strength += 1;
+        parent::levelUp();
+        $this->magic++;
     }
 }

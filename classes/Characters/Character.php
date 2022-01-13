@@ -4,14 +4,29 @@ require_once(__DIR__ . "/../Skill.php");
 
 abstract class Character
 {
+    protected int   $id;
     protected int   $lifePoint;
     protected int   $speed;
     protected int   $strength;
     protected int   $armor;
+    protected int   $faith;
+    protected int   $magic;
+    protected int   $agility;
     /** 
      * @var Skill[] $skills
      */
     protected $skills; // Skill
+
+
+    public function __construct(int $id, int $lifePoint, int $speed, int $strength, int $armor, int $faith, int $magic, int $agility, array $skills)
+    {
+        $this->id = $id;
+        $this->lifePoint = $lifePoint;
+        $this->speed = $lifePoint;
+        $this->strength = $strength;
+        $this->armor = $armor;
+        $this->skills = $skills;
+    }
 
     public function attaK(int $damages, Character $enemy)
     {
@@ -22,26 +37,15 @@ abstract class Character
         }
     }
 
-    public abstract function useSkill(string $label, array $enemies); // Characters[] enemies
-
-    public function getDamages(int $damages)
-    {
-        $this->lifePoint -= $damages;
-    }
-
     public function punch(Character $enemy)
     {
         $this->attaK($this->getStrength(), $enemy);
     }
 
-    public function getStrength()
+    public function getDamages(int $damages)
     {
-        return $this->strength;
-    }
-
-    public function getSpeed()
-    {
-        return $this->speed;
+        $reducedDamages = $damages - $this->armor;
+        $this->lifePoint -= $reducedDamages;
     }
 
     public function getLifePoint()
@@ -49,13 +53,33 @@ abstract class Character
         return $this->lifePoint;
     }
 
+    public function getSpeed()
+    {
+        return $this->speed;
+    }
+
+    public function getStrength()
+    {
+        return $this->strength;
+    }
+
     public function getArmor()
     {
         return $this->armor;
     }
 
-    public function getSkills()
+    public function getFaith()
     {
-        return $this->skills;
+        return $this->faith;
+    }
+
+    public function getMagic()
+    {
+        return $this->magic;
+    }
+
+    public function getAgility()
+    {
+        return $this->agility;
     }
 }

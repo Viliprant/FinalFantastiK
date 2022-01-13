@@ -4,17 +4,16 @@ require_once("Character.php");
 
 class Monster extends Character
 {
-    protected int       $id;
     protected string    $name;
-    protected string    $sprite;
 
-    public function __construct(string $name = "gobelin", $sprite = "gobelin.png")
+    public function __construct(string $name, int $id, int $lifePoint, int $speed, int $strength, int $armor, int $faith, int $magic, int $agility, array $skills)
     {
+        parent::__construct($id, $lifePoint, $speed, $strength, $armor, $faith, $magic, $agility, $skills);
         $this->name = $name;
-        $this->sprite = $sprite;
     }
 
-    public function useSkill(string $label, array $enemies)
+    public function getName()
     {
-    } // Characters[] enemies
+        return $this->name;
+    }
 }
