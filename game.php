@@ -17,9 +17,7 @@ $_SESSION['FinalFantastiK'] = $game;
 $player = $game->getPlayer();
 
 $skills = $player->getSkills();
-
-echo $game->getLevel();
-var_dump($game->getCurrentEnemies());
+$enemies = $game->getCurrentEnemies();
 
 function createNewGame()
 {
@@ -30,11 +28,11 @@ function createNewGame()
 
 function continueGame()
 {
-
     $game = $_SESSION['FinalFantastiK'];
 
     if (isset($_POST['player-attaK']) && !empty($_POST['player-attaK'])) {
-        echo $_POST['player-attaK'];
+
+        echo $game->getPlayer()->useSkill($_POST['player-attaK'], $game->getCurrentEnemies());
     }
 
     return $game;

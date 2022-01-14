@@ -30,15 +30,20 @@ abstract class Player extends Character
         return $this->level;
     }
 
-    public function useSkill(string $label, array $enemies, Character $target = null)
+    public function useSkill(int $id, array $enemies, Character $target = null)
     {
-        if ($this->skills[$label]->getIsMultiTarget()) {
+
+        $skill = $this->skills[array_search($id, $this->skills)];
+
+        if ($skill->getIsMultiTarget()) {
             foreach ($enemies as $enemy) {
-                $this->attaK($this->skills[$label]->calculDamage($this), $enemy);
+                $this->attaK($skill->calculDamage($this), $enemy);
             }
         } else {
-            $this->attaK($this->skills[$label]->calculDamage($this), $target);
+            $this->attaK($skill->calculDamage($this), $target);
         }
+
+        return $skill;
     }
 
     public function levelUp()

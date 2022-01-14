@@ -10,6 +10,7 @@ class Monster extends Character
     {
         parent::__construct($id, $lifePoint, $speed, $strength, $armor, $faith, $magic, $agility, $skills);
         $this->name = $name;
+        $this->pixelart = "pixelart-" . $this->name;
     }
 
     public function getName()

@@ -1,8 +1,4 @@
 :root {
-    --gameplay-main-color: red;
-    --gameplay-secondary-color: red;
-    --gameplay-main-bg: red;
-    --gameplay-secondary-bg: red;
     --gameplay-landscape-bg: #80deea;
     --gameplay-actions-bg: #b0bec5;
 }
@@ -159,4 +155,59 @@
     top: 100%;
     z-index: 1;
     margin-top: 1rem;
+    text-align: center;
+}
+
+.monster-stats {
+    flex-grow: 1;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22),
+        inset 0 0 0 0.3em #455a64;
+    background-color: #b9b9b9;
+    padding: 0.5em 1em;
+    display: grid;
+}
+
+.monster-stats .stat {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.monster-stats .basics-stats .stat span {
+    font-size: 1.3em;
+    text-align: center;
+}
+
+.monster-stats .basics-stats .stat img {
+    width: 2.5em;
+    object-fit: contain;
+}
+
+#enemies-container {
+    position: absolute;
+    top: 10%;
+    left: 5%;
+    width: 90%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.enemy-container {
+    display: flex;
+}
+
+.enemy-container img {
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+.enemy-character {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22), inset 0 0 0 0.3em #455a64;
+    padding: 0.5em;
+    width: 25%;
+    position: relative;
+    display: grid;
+    place-items: center;
+    background-color: #b97c7c;
 }
