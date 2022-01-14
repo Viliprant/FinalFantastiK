@@ -258,3 +258,15 @@
     background-color: #343642;
     color: white;
 }
+
+#level {
+    position: absolute;
+    z-index: 3;
+    right: 1rem;
+    top: 1rem;
+    padding: 0.5em 1em;
+    background-color: purple;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    color: white;
+    font-size: 1.5em;
+}

@@ -10,6 +10,10 @@
 </head>
 
 <body>
+    <!-- LEVEL -->
+    <div id="level">
+        <span>Etage <?= $game->getLevel() ?></span>
+    </div>
     <!-- STATE GAME -->
     <?php
     if ($game->getState() === false || $game->getState() === true) {

@@ -48,9 +48,9 @@ CREATE TABLE IF NOT EXISTS `karacter` (
 --
 
 INSERT INTO `karacter` (`id`, `class`, `label`, `id_karacter_kategory`, `life_point`, `armor`, `strength`, `speed`, `agility`, `faith`, `magic`) VALUES
-(1, 'Paladin', 'Paladin', 1, 25, 4, 6, 3, 0, 4, 0),
-(2, 'Wizard', 'Sorcier', 1, 15, 1, 2, 5, 0, 0, 6),
-(3, 'Thief', 'Voleur', 1, 20, 3, 3, 7, 7, 0, 0),
+(1, 'Paladin', 'Paladin', 1, 250, 4, 15, 3, 0, 4, 0),
+(2, 'Wizard', 'Sorcier', 1, 15, 1, 2, 5, 0, 0, 15),
+(3, 'Thief', 'Voleur', 1, 20, 3, 7, 7, 7, 0, 0),
 (4, 'Monster', 'Robot Danseur', 2, 12, 6, 4, 3, 0, 0, 0),
 (5, 'Monster', 'OKlaf', 3, 45, 10, 8, 0, 0, 0, 2),
 (6, 'Monster', 'Medusa', 2, 18, 5, 5, 5, 2, 0, 0),

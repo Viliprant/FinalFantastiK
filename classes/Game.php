@@ -7,7 +7,7 @@ class Game
     private array $enemies;
     private array $boss;
     private array $currentEnemies;
-    private int $level = 2;
+    private int $level = 1;
     private array $history = [];
     private ?bool $state = null;
 
@@ -56,10 +56,18 @@ class Game
 
             if ($this->level == 3) {
                 $this->state = true;
+            } else {
+                $this->newLevel();
+                $this->addToCurrentEnemies();
             }
         }
 
         $this->addToHistory($history_turn);
+    }
+
+    public function newLevel()
+    {
+        $this->level++;
     }
 
     public function getState()
