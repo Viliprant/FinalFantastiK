@@ -43,14 +43,16 @@ class Skill
 
         $damages = 0.0;
         foreach ($this->type as $key => $multiplier) {
-            if (isset($character->$key) && !empty($character->$key)) {
-                $damages += $character->$key * $multiplier;
+            $method = "get" . ucfirst($key);
+
+            if ($character->$method() != null) {
+                $damages += $character->$method() * $multiplier;
             }
         }
 
-        $this->currentCoolDown = 0;
+        $this->currentCoolDown = -1;
 
-        return $damages;
+        return intval(round($damages));
     }
 
     public function reducesTimeLeft()

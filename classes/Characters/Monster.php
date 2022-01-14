@@ -17,4 +17,18 @@ class Monster extends Character
     {
         return $this->name;
     }
+
+    public function useSkill(Player $target)
+    {
+        $available_skills = array_filter($this->skills, fn ($skill) => $skill->isAvailable());
+        if (empty($available_skills)) {
+            $this->punch($target);
+            return "L'ennemi tente de vous mettre un petit Koup de poinK de MERDE";
+        } else {
+            $skill = $available_skills[array_rand($available_skills)];
+            $dmg = $skill->calculDamage($this);
+            $this->attaK($dmg, $target);
+            return "Attaque " . $skill->getLabel() . " sur " . $target->getPseudo() . " pour " . $dmg . " dégats";
+        }
+    }
 }

@@ -7,7 +7,8 @@ class Game
     private array $enemies;
     private array $boss;
     private array $currentEnemies;
-    private int $level = 3;
+    private int $level = 2;
+    private array $history = [];
 
     public function __construct($selected, $pseudo)
     {
@@ -21,6 +22,27 @@ class Game
         $this->addToCurrentEnemies();
     }
 
+    public function handleTurn()
+    {
+        $history_turn = [];
+        $ingame_karacters = array_merge([$this->player], $this->currentEnemies);
+        usort($ingame_karacters, fn ($k1, $k2) => $k1->getSpeed() >= $k2->getSpeed() ? -1 : 1);
+        foreach ($ingame_karacters as $karacter) {
+            if ($karacter instanceof Player) {
+                $target = $this->getCurrentEnemies()[$_POST['target']];
+                $attak = $this->getPlayer()->useSkill($_POST['player-attaK'], $this->getCurrentEnemies(), $target);
+                $history_turn[] = $attak;
+            } else {
+                $target = $this->player;
+                $attak = $karacter->useSkill($target);
+                $history_turn[] = $attak;
+            }
+        }
+
+        $this->addToHistory($history_turn);
+        var_dump($this->getLastHistory());
+    }
+
     public function getPlayer()
     {
         return $this->player;
@@ -29,6 +51,16 @@ class Game
     public function getLevel()
     {
         return $this->level;
+    }
+
+    public function getLastHistory()
+    {
+        return $this->history[array_key_last($this->history)];
+    }
+
+    public function addToHistory($attak)
+    {
+        $this->history[] = $attak;
     }
 
     public function setPlayer($allKaracters, $selected, $pseudo)
@@ -58,7 +90,7 @@ class Game
             $this->currentEnemies[] = $this->boss[array_rand($this->boss)];
         } else {
             for ($i = 0; $i < ($this->level % 3); $i++) {
-                $this->currentEnemies[] = $this->enemies[array_rand($this->enemies)];
+                $this->currentEnemies[] = clone $this->enemies[array_rand($this->enemies)];
             }
         }
     }

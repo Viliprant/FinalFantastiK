@@ -31,8 +31,9 @@ function continueGame()
     $game = $_SESSION['FinalFantastiK'];
 
     if (isset($_POST['player-attaK']) && !empty($_POST['player-attaK'])) {
-
-        echo $game->getPlayer()->useSkill($_POST['player-attaK'], $game->getCurrentEnemies());
+        if (isset($_POST['target'])) {
+            $game->handleTurn();
+        }
     }
 
     return $game;

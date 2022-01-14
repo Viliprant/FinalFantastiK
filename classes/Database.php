@@ -11,7 +11,7 @@ class Database
     private static $host = "localhost";
     private static $port = 3306;
     private static $user = "root";
-    private static $pwd = "";
+    private static $pwd = "finalk";
     private static $db_name = "finalfantastik";
 
     public static function init()

@@ -35,6 +35,7 @@ abstract class Character
 
     public function attaK(int $damages, Character $enemy)
     {
+
         $enemy->getDamages($damages);
 
         foreach ($this->skills as $key => $skill) {
@@ -44,7 +45,7 @@ abstract class Character
 
     public function punch(Character $enemy)
     {
-        $this->attaK($this->getStrength(), $enemy);
+        $this->attaK($this->strength, $enemy);
     }
 
     public function getDamages(int $damages)

@@ -10,43 +10,47 @@
 </head>
 
 <body>
+    <button class="">Exit</button>
     <form method="POST" action="" class="gameplay-container">
         <div id="game-view-container">
             <!-- ENEMIES -->
             <div id="enemies-container">
                 <?php
-                foreach ($enemies as $enemy) {
+                foreach ($enemies as $key => $enemy) {
                 ?>
-                    <div class="enemy-container">
-                        <!-- STATS ENEMY -->
-                        <div class="monster-stats">
-                            <div class="basics-stats">
-                                <div class="stat">
-                                    <img src="gifs/stats/heart.gif" alt="">
-                                    <span><?= $enemy->getLifePoint() ?></span>
-                                </div>
-                                <div class="stat">
-                                    <img src="gifs/stats/shield.gif" alt="">
-                                    <span><?= $enemy->getArmor() ?></span>
-                                </div>
-                                <div class="stat">
-                                    <img src="gifs/stats/speed.gif" alt="">
-                                    <span><?= $enemy->getSpeed() ?></span>
-                                </div>
-                                <div class="stat">
-                                    <img src="gifs/stats/strength.gif" alt="">
-                                    <span><?= $enemy->getStrength() ?></span>
+                    <div>
+                        <input type="radio" name="target" id="target<?= $key ?>" value="<?= $key ?>" hidden />
+                        <label class="enemy-container" for="target<?= $key ?>">
+                            <!-- STATS ENEMY -->
+                            <div class="monster-stats">
+                                <div class="basics-stats">
+                                    <div class="stat">
+                                        <img src="gifs/stats/heart.gif" alt="">
+                                        <span><?= $enemy->getLifePoint() ?></span>
+                                    </div>
+                                    <div class="stat">
+                                        <img src="gifs/stats/shield.gif" alt="">
+                                        <span><?= $enemy->getArmor() ?></span>
+                                    </div>
+                                    <div class="stat">
+                                        <img src="gifs/stats/speed.gif" alt="">
+                                        <span><?= $enemy->getSpeed() ?></span>
+                                    </div>
+                                    <div class="stat">
+                                        <img src="gifs/stats/strength.gif" alt="">
+                                        <span><?= $enemy->getStrength() ?></span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <!-- ENEMY KARACTER -->
-                        <div class="enemy-character">
-                            <img src="gifs/<?= $enemy->getPixelart() ?>.gif" alt="<?= $enemy->getPixelart() ?>">
-                            <div class="name-Karacter">
-                                <span class="bold capitalize"><?= $enemy->getName() ?></span>
-                                <span><?= get_class($enemy) ?></span>
+                            <!-- ENEMY KARACTER -->
+                            <div class="enemy-character">
+                                <img src="gifs/<?= $enemy->getPixelart() ?>.gif" alt="<?= $enemy->getPixelart() ?>">
+                                <div class="name-Karacter">
+                                    <span class="bold capitalize"><?= $enemy->getName() ?></span>
+                                    <span><?= get_class($enemy) ?></span>
+                                </div>
                             </div>
-                        </div>
+                        </label>
                     </div>
                 <?php
                 }
@@ -113,7 +117,7 @@
                 <!-- Skills -->
                 <button type="submit" name="player-attaK" value="<?= $skill->getId() ?>" class="player-skills <?= !$skill->isAvailable() ? "unavailable" : "" ?>" <?= !$skill->isAvailable() ? "disabled" : "" ?>>
                     <span class="label-skill"><?= $skill->getLabel() ?></span>
-                    <?php if ($skill->getTimeLeft() > 0) {
+                    <?php if (!$skill->isAvailable()) {
                     ?>
                         <span class="skill-time-left"><?= $skill->getTimeLeft() ?></span>
                     <?php

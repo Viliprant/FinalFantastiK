@@ -211,3 +211,8 @@
     place-items: center;
     background-color: #b97c7c;
 }
+
+#enemies-container input[type="radio"]:checked ~ label {
+
+    box-shadow: 0 0 10px 20px #6a1a1a;
+}

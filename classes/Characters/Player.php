@@ -30,20 +30,27 @@ abstract class Player extends Character
         return $this->level;
     }
 
-    public function useSkill(int $id, array $enemies, Character $target = null)
+    public function useSkill(int $id, array $enemies, Monster $target = null)
     {
-
-        $skill = $this->skills[array_search($id, $this->skills)];
-
-        if ($skill->getIsMultiTarget()) {
-            foreach ($enemies as $enemy) {
-                $this->attaK($skill->calculDamage($this), $enemy);
-            }
+        if ($id == -1) {
+            $this->punch($target);
+            return "Attaque Punch, c'est très peu efficace ! L'ADVERSAIRE SE MOQUE DE VOUS ! MOUAHAHAHHA !";
         } else {
-            $this->attaK($skill->calculDamage($this), $target);
+            $skills = array_filter($this->skills,  fn ($skill) => $skill->getID() == $id);;
+            $skill = $skills[array_key_first($skills)];
+
+            if ($skill->getIsMultiTarget()) {
+                foreach ($enemies as $enemy) {
+                    $this->attaK($skill->calculDamage($this), $enemy);
+                }
+                return "Attaque " . $skill->getLabel() . " sur tout les ennemies ! WOW ";
+            } else {
+                $dmg = $skill->calculDamage($this);
+                $this->attaK($dmg, $target);
+            }
         }
 
-        return $skill;
+        return "Attaque " . $skill->getLabel() . " sur " . $target->getName() . " pour " . $dmg . " dégats";
     }
 
     public function levelUp()
