@@ -7,8 +7,9 @@ class Game
     private array $enemies;
     private array $boss;
     private array $currentEnemies;
-    private int $level = 3;
+    private int $level = 2;
     private array $history = [];
+    private ?bool $state = null;
 
     public function __construct($selected, $pseudo)
     {
@@ -27,19 +28,43 @@ class Game
         $history_turn = [];
         $ingame_karacters = array_merge([$this->player], $this->currentEnemies);
         usort($ingame_karacters, fn ($k1, $k2) => $k1->getSpeed() >= $k2->getSpeed() ? -1 : 1);
-        foreach ($ingame_karacters as $karacter) {
-            if ($karacter instanceof Player) {
+        for ($i = 0; $i < Count($ingame_karacters); $i++) {
+            if ($ingame_karacters[$i] instanceof Player) {
                 $target = $this->getCurrentEnemies()[$_POST['target']];
                 $attak = $this->getPlayer()->useSkill($_POST['player-attaK'], $this->getCurrentEnemies(), $target);
                 $history_turn[] = $attak;
+                foreach ($this->currentEnemies as $key => $enemy) {
+                    if ($enemy->getLifePoint() <= 0) {
+                        $this->removeFromCurrentEnemies($enemy);
+                        $history_turn[] = "{$enemy->getName()} a été tué !";
+                        array_splice($ingame_karacters, array_search($enemy, $ingame_karacters), 1);
+                    }
+                }
             } else {
                 $target = $this->player;
-                $attak = $karacter->useSkill($target);
+                $attak = $ingame_karacters[$i]->useSkill($target);
                 $history_turn[] = $attak;
             }
         }
 
+        if ($this->player->getLifePoint() <= 0) {
+            $history_turn[] = "Vous êtes mooort 😢 !! ";
+            $this->state = false;
+        }
+        if (count($this->getCurrentEnemies()) <= 0) {
+            $history_turn[] = "Vous avez battu tout le monde gg";
+
+            if ($this->level == 3) {
+                $this->state = true;
+            }
+        }
+
         $this->addToHistory($history_turn);
+    }
+
+    public function getState()
+    {
+        return $this->state;
     }
 
     public function getPlayer()
@@ -96,5 +121,9 @@ class Game
                 $this->currentEnemies[] = clone $this->enemies[array_rand($this->enemies)];
             }
         }
+    }
+    public function removeFromCurrentEnemies($dead)
+    {
+        array_splice($this->currentEnemies, array_search($dead, $this->currentEnemies), 1);
     }
 }

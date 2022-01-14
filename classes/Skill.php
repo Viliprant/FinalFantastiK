@@ -38,6 +38,7 @@ class Skill
     public function calculDamage(Character $character)
     {
         if (!$this->isAvailable()) {
+            echo 1;
             return 0;
         }
 

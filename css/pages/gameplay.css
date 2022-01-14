@@ -10,7 +10,7 @@
     top: 1rem;
     left: 1rem;
     background-color: #e53935;
-    z-index: 1;
+    z-index: 10;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     color: white;
 }
@@ -245,4 +245,16 @@
 
 #history:not(:checked)~label {
     display: none;
+}
+
+#end {
+    position: absolute;
+    height: 100vh;
+    z-index: 5;
+    width: 100vw;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    background-color: #343642;
+    color: white;
 }

@@ -10,6 +10,16 @@
 </head>
 
 <body>
+    <!-- STATE GAME -->
+    <?php
+    if ($game->getState() === false || $game->getState() === true) {
+    ?>
+        <div id="end">
+            <p>Vous avez <?= $game->getState() ? "gagné" : "perdu" ?> ! </p>
+        </div>
+    <?php
+    }
+    ?>
     <a id="exit" href="index.php">Quitter</a>
     <!-- LAST HISTORY -->
     <?php

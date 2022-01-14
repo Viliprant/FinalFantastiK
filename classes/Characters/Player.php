@@ -40,9 +40,11 @@ abstract class Player extends Character
             $skill = $skills[array_key_first($skills)];
 
             if ($skill->getIsMultiTarget()) {
+                $damage = $skill->calculDamage($this);
                 foreach ($enemies as $enemy) {
-                    $this->attaK($skill->calculDamage($this), $enemy);
+                    $this->attaK($damage, $enemy);
                 }
+
                 return "Attaque " . $skill->getLabel() . " sur tout les ennemies ! WOW ";
             } else {
                 $dmg = $skill->calculDamage($this);
