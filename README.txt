@@ -1,1 +1,0 @@
-Ne pas oublier de faire l'export de la bdd et mettre le fichier sur GIT pour le prof !
