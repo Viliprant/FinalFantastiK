@@ -7,7 +7,7 @@ class Game
     private array $enemies;
     private array $boss;
     private array $currentEnemies;
-    private int $level = 2;
+    private int $level = 3;
     private array $history = [];
 
     public function __construct($selected, $pseudo)
@@ -40,7 +40,6 @@ class Game
         }
 
         $this->addToHistory($history_turn);
-        var_dump($this->getLastHistory());
     }
 
     public function getPlayer()
@@ -55,7 +54,11 @@ class Game
 
     public function getLastHistory()
     {
-        return $this->history[array_key_last($this->history)];
+        if ($this->history) {
+            return $this->history[array_key_last($this->history)];
+        }
+
+        return null;
     }
 
     public function addToHistory($attak)

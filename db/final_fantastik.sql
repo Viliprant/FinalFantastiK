@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : jeu. 13 jan. 2022 à 14:45
+-- Généré le : ven. 14 jan. 2022 à 13:40
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `karacter` (
   `faith` int(11) NOT NULL,
   `magic` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `karacter`
@@ -53,7 +53,9 @@ INSERT INTO `karacter` (`id`, `class`, `label`, `id_karacter_kategory`, `life_po
 (3, 'Thief', 'Voleur', 1, 20, 3, 3, 7, 7, 0, 0),
 (4, 'Monster', 'Robot Danseur', 2, 12, 6, 4, 3, 0, 0, 0),
 (5, 'Monster', 'OKlaf', 3, 45, 10, 8, 0, 0, 0, 2),
-(6, 'Monster', 'Medusa', 2, 18, 5, 5, 5, 2, 0, 0);
+(6, 'Monster', 'Medusa', 2, 18, 5, 5, 5, 2, 0, 0),
+(7, 'Monster', 'Kobelin', 2, 22, 2, 4, 2, 3, 0, 0),
+(8, 'Monster', 'SKelette', 3, 50, 4, 6, 6, 0, 0, 8);
 
 -- --------------------------------------------------------
 
@@ -89,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `karacter_skill` (
   `id_karacter` int(11) NOT NULL,
   `id_skill` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `karacter_skill`
@@ -113,7 +115,13 @@ INSERT INTO `karacter_skill` (`id`, `id_karacter`, `id_skill`) VALUES
 (15, 5, 17),
 (16, 6, 18),
 (17, 6, 19),
-(18, 6, 20);
+(18, 6, 20),
+(19, 7, 21),
+(20, 7, 22),
+(21, 7, 23),
+(22, 8, 24),
+(23, 8, 25),
+(24, 8, 26);
 
 -- --------------------------------------------------------
 
@@ -128,7 +136,7 @@ CREATE TABLE IF NOT EXISTS `skill` (
   `is_multi_target` tinyint(1) NOT NULL DEFAULT '0',
   `cool_down` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `skill`
@@ -152,7 +160,13 @@ INSERT INTO `skill` (`id`, `label`, `is_multi_target`, `cool_down`) VALUES
 (17, 'Pieux de stalaKtite', 1, 4),
 (18, 'PutréfaKtion nocive', 0, 2),
 (19, 'ReKard pétrifiant', 0, 1),
-(20, 'Gangrene ChoKante', 0, 4);
+(20, 'Gangrene ChoKante', 0, 4),
+(21, 'Korps à Korps', 0, 1),
+(22, 'Kourdin assomant', 0, 2),
+(23, 'Kreusement funeste', 1, 4),
+(24, 'Kontrôle psychique', 0, 1),
+(25, 'Konvocation des morts', 0, 2),
+(26, 'KataKlysme foudroyant', 1, 5);
 
 -- --------------------------------------------------------
 
@@ -167,7 +181,7 @@ CREATE TABLE IF NOT EXISTS `skill_type` (
   `id_type` int(11) NOT NULL,
   `multiplier` float NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `skill_type`
@@ -198,7 +212,16 @@ INSERT INTO `skill_type` (`id`, `id_skill`, `id_type`, `multiplier`) VALUES
 (22, 18, 1, 0.5),
 (23, 19, 1, 1.4),
 (24, 20, 1, 1.5),
-(25, 20, 4, 1.5);
+(25, 20, 4, 1.5),
+(26, 21, 1, 1.5),
+(27, 22, 1, 1.5),
+(28, 22, 4, 1.5),
+(29, 23, 1, 2),
+(30, 23, 4, 2.5),
+(31, 24, 1, 1),
+(32, 24, 2, 0.5),
+(33, 25, 2, 1.5),
+(34, 26, 2, 1.8);
 
 -- --------------------------------------------------------
 

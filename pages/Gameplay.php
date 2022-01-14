@@ -10,7 +10,29 @@
 </head>
 
 <body>
-    <button class="">Exit</button>
+    <a id="exit" href="index.php">Quitter</a>
+    <!-- LAST HISTORY -->
+    <?php
+    if (isset($last_history) && !empty($last_history)) {
+    ?>
+        <input type="checkbox" id="history" hidden checked>
+        <label id="history-container" for="history">
+            <h2>Historique</h2>
+            <ol>
+                <?php
+                foreach ($last_history as $key => $attack) {
+                ?>
+                    <li><?= $attack ?></li>
+                <?php
+                }
+                ?>
+            </ol>
+        </label>
+    <?php
+    }
+    ?>
+
+    <!-- GAME -->
     <form method="POST" action="" class="gameplay-container">
         <div id="game-view-container">
             <!-- ENEMIES -->
@@ -19,7 +41,7 @@
                 foreach ($enemies as $key => $enemy) {
                 ?>
                     <div>
-                        <input type="radio" name="target" id="target<?= $key ?>" value="<?= $key ?>" hidden />
+                        <input type="radio" name="target" id="target<?= $key ?>" value="<?= $key ?>" hidden checked />
                         <label class="enemy-container" for="target<?= $key ?>">
                             <!-- STATS ENEMY -->
                             <div class="monster-stats">

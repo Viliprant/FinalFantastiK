@@ -19,6 +19,9 @@ $player = $game->getPlayer();
 $skills = $player->getSkills();
 $enemies = $game->getCurrentEnemies();
 
+$last_history = $game->getLastHistory();
+
+
 function createNewGame()
 {
     $selected_k = $_POST["choice"];

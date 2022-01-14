@@ -17,7 +17,7 @@ $choices = Database::getKaracters("Player");
         <h1>Choisir un <span class="K">K</span>aracter</h1>
         <div class="pseudo-input">
             <label for="pseudo">Pseudo</label>
-            <input type="text" id="pseudo" name="pseudo" required autocomplete="off" />
+            <input type="text" id="pseudo" name="pseudo" required autocomplete="off" autofocus />
         </div>
         <?php
         foreach ($choices as $K) {
