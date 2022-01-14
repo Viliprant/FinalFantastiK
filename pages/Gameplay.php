@@ -10,11 +10,20 @@
 </head>
 
 <body>
-    <div class="gameplay-container">
+    <form method="POST" action="" class="gameplay-container">
         <div id="game-view-container">
             <!-- PLAYER -->
             <div id="player-container">
-                <img id="player-character" src="gifs/<?= $player->getPixelart() ?>.gif" alt="<?= $player->getPixelart() ?>">
+                <!-- GIF KARACTER -->
+                <div id="player-character">
+                    <img src="gifs/<?= $player->getPixelart() ?>.gif" alt="<?= $player->getPixelart() ?>">
+                    <div class="name-Karacter">
+                        <span class="bold capitalize"><?= $player->getPseudo() ?></span>
+                        <span><?= get_class($player) ?></span>
+                        <span>Lvl <?= $player->getLevel() ?></span>
+                    </div>
+                </div>
+                <!-- STATS -->
                 <div id="player-stats">
                     <div class="basics-stats">
                         <div class="stat">
@@ -36,29 +45,32 @@
                     </div>
                     <div class="special-stats">
                         <div class="stat">
-                            <img src="gifs/stats/unknown.png" alt="">
+                            <img src="gifs/stats/faith.png" alt="">
                             <span><?= $player->getFaith() ?></span>
                         </div>
                         <div class="stat">
-                            <img src="gifs/stats/unknown.png" alt="">
+                            <img src="gifs/stats/ability.png" alt="">
                             <span><?= $player->getAgility() ?></span>
                         </div>
                         <div class="stat">
-                            <img src="gifs/stats/unknown.png" alt="">
+                            <img src="gifs/stats/magic.png" alt="">
                             <span><?= $player->getMagic() ?></span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- ACTIONS -->
         <div id="game-actions-container">
-            <div class="player-skills">
+            <!-- Koup par défaut -->
+            <button type="submit" value="-1" name="player-attaK" class="player-skills">
                 <span class="label-skill">Koup-Kraintif</span>
-            </div>
+            </button>
             <?php
             foreach ($skills as $key => $skill) {
             ?>
-                <div class="player-skills <?= $skill->getTimeLeft() > 0 ? "unavailable" : "" ?>">
+                <!-- Skills -->
+                <button type="submit" name="player-attaK" value="<?= $skill->getId() ?>" class="player-skills <?= $skill->getTimeLeft() > 0 ? "unavailable" : "" ?>" <?= $skill->getTimeLeft() > 0 ? "disabled" : "" ?>>
                     <span class="label-skill"><?= $skill->getLabel() ?></span>
                     <?php if ($skill->getTimeLeft() > 0) {
                     ?>
@@ -66,12 +78,12 @@
                     <?php
                     }
                     ?>
-                </div>
+                </button>
             <?php
             }
             ?>
         </div>
-    </div>
+    </form>
 </body>
 
 </html>

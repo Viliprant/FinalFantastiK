@@ -2,9 +2,14 @@
 
 require_once('classes/Database.php');
 
-$db = new Database();
-$db->init();
-$choices = $db->getKaracters("Player");
+session_start();
+
+if (isset($_SESSION['FinalFantastiK']) && !empty($_SESSION['FinalFantastiK'])) {
+    unset($_SESSION['FinalFantastiK']);
+}
+
+Database::init();
+$choices = Database::getKaracters("Player");
 
 ?>
 <div class="select-k">

@@ -50,7 +50,7 @@ class Database
                 $karacter['magic'],
                 $karacter['agility'],
                 self::getSkills($karacter['id']),
-                $label == "Monster" ? $karacter['label'] : ""
+                $label != "Player" ? $karacter['label'] : ""
             );
         }
         return $karacters;
@@ -63,6 +63,7 @@ class Database
                 FROM skill sk
                 INNER JOIN karacter_skill ks ON sk.id = ks.id_skill
                 WHERE ks.id_karacter = :id
+                ORDER BY sk.`cool_down` ASC
         ';
         $result = self::$conn->prepare($request);
         $result->bindParam('id', $idKaracter, PDO::PARAM_INT);

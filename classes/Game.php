@@ -5,8 +5,9 @@ class Game
 {
     private Player $player;
     private array $enemies;
-    private Boss $boss;
+    private array $boss;
     private array $currentEnemies;
+    private int $level = 3;
 
     public function __construct($selected, $pseudo)
     {
@@ -14,12 +15,20 @@ class Game
         $this->setPlayer(Database::getKaracters("Player"), $selected, $pseudo);
 
         $this->enemies = Database::getKaracters("Monster");
-        $this->addToCurrentEnemies($this->enemies[0]);
+
+        $this->boss = Database::getKaracters("Boss");
+
+        $this->addToCurrentEnemies();
     }
 
     public function getPlayer()
     {
         return $this->player;
+    }
+
+    public function getLevel()
+    {
+        return $this->level;
     }
 
     public function setPlayer($allKaracters, $selected, $pseudo)
@@ -43,8 +52,14 @@ class Game
         return $this->currentEnemies;
     }
 
-    public function addToCurrentEnemies($currentEnemy)
+    public function addToCurrentEnemies()
     {
-        return $this->currentEnemies[] = $currentEnemy;
+        if ($this->level % 3 == 0) {
+            $this->currentEnemies[] = $this->boss[array_rand($this->boss)];
+        } else {
+            for ($i = 0; $i < ($this->level % 3); $i++) {
+                $this->currentEnemies[] = $this->enemies[array_rand($this->enemies)];
+            }
+        }
     }
 }
