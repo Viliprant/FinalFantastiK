@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1:3306
--- Généré le : ven. 14 jan. 2022 à 13:40
--- Version du serveur :  5.7.31
--- Version de PHP : 7.3.21
+-- Hôte : db
+-- Généré le : ven. 14 jan. 2022 à 16:44
+-- Version du serveur : 8.0.27
+-- Version de PHP : 7.4.20
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `final_fantastik`
+-- Base de données : `finalfantastik`
 --
 
 -- --------------------------------------------------------
@@ -27,30 +27,28 @@ SET time_zone = "+00:00";
 -- Structure de la table `karacter`
 --
 
-DROP TABLE IF EXISTS `karacter`;
-CREATE TABLE IF NOT EXISTS `karacter` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `karacter` (
+  `id` int NOT NULL,
   `class` varchar(256) NOT NULL,
   `label` varchar(256) NOT NULL,
-  `id_karacter_kategory` int(11) NOT NULL,
-  `life_point` int(11) NOT NULL,
-  `armor` int(11) NOT NULL,
-  `strength` int(11) NOT NULL,
-  `speed` int(11) NOT NULL,
-  `agility` int(11) NOT NULL,
-  `faith` int(11) NOT NULL,
-  `magic` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+  `id_karacter_kategory` int NOT NULL,
+  `life_point` int NOT NULL,
+  `armor` int NOT NULL,
+  `strength` int NOT NULL,
+  `speed` int NOT NULL,
+  `agility` int NOT NULL,
+  `faith` int NOT NULL,
+  `magic` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Déchargement des données de la table `karacter`
 --
 
 INSERT INTO `karacter` (`id`, `class`, `label`, `id_karacter_kategory`, `life_point`, `armor`, `strength`, `speed`, `agility`, `faith`, `magic`) VALUES
-(1, 'Paladin', 'Paladin', 1, 250, 4, 15, 3, 0, 4, 0),
-(2, 'Wizard', 'Sorcier', 1, 15, 1, 2, 5, 0, 0, 15),
-(3, 'Thief', 'Voleur', 1, 20, 3, 7, 7, 7, 0, 0),
+(1, 'Paladin', 'Paladin', 1, 30, 5, 6, 3, 0, 6, 0),
+(2, 'Wizard', 'Sorcier', 1, 20, 3, 3, 6, 0, 0, 15),
+(3, 'Thief', 'Voleur', 1, 20, 4, 5, 7, 15, 0, 0),
 (4, 'Monster', 'Robot Danseur', 2, 12, 6, 4, 3, 0, 0, 0),
 (5, 'Monster', 'OKlaf', 3, 45, 10, 8, 0, 0, 0, 2),
 (6, 'Monster', 'Medusa', 2, 18, 5, 5, 5, 2, 0, 0),
@@ -63,12 +61,10 @@ INSERT INTO `karacter` (`id`, `class`, `label`, `id_karacter_kategory`, `life_po
 -- Structure de la table `karacter_kategory`
 --
 
-DROP TABLE IF EXISTS `karacter_kategory`;
-CREATE TABLE IF NOT EXISTS `karacter_kategory` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `label` varchar(256) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+CREATE TABLE `karacter_kategory` (
+  `id` int NOT NULL,
+  `label` varchar(256) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Déchargement des données de la table `karacter_kategory`
@@ -85,13 +81,11 @@ INSERT INTO `karacter_kategory` (`id`, `label`) VALUES
 -- Structure de la table `karacter_skill`
 --
 
-DROP TABLE IF EXISTS `karacter_skill`;
-CREATE TABLE IF NOT EXISTS `karacter_skill` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_karacter` int(11) NOT NULL,
-  `id_skill` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+CREATE TABLE `karacter_skill` (
+  `id` int NOT NULL,
+  `id_karacter` int NOT NULL,
+  `id_skill` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Déchargement des données de la table `karacter_skill`
@@ -129,14 +123,12 @@ INSERT INTO `karacter_skill` (`id`, `id_karacter`, `id_skill`) VALUES
 -- Structure de la table `skill`
 --
 
-DROP TABLE IF EXISTS `skill`;
-CREATE TABLE IF NOT EXISTS `skill` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `skill` (
+  `id` int NOT NULL,
   `label` varchar(256) NOT NULL,
   `is_multi_target` tinyint(1) NOT NULL DEFAULT '0',
-  `cool_down` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+  `cool_down` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Déchargement des données de la table `skill`
@@ -174,14 +166,12 @@ INSERT INTO `skill` (`id`, `label`, `is_multi_target`, `cool_down`) VALUES
 -- Structure de la table `skill_type`
 --
 
-DROP TABLE IF EXISTS `skill_type`;
-CREATE TABLE IF NOT EXISTS `skill_type` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_skill` int(11) NOT NULL,
-  `id_type` int(11) NOT NULL,
-  `multiplier` float NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
+CREATE TABLE `skill_type` (
+  `id` int NOT NULL,
+  `id_skill` int NOT NULL,
+  `id_type` int NOT NULL,
+  `multiplier` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Déchargement des données de la table `skill_type`
@@ -189,18 +179,18 @@ CREATE TABLE IF NOT EXISTS `skill_type` (
 
 INSERT INTO `skill_type` (`id`, `id_skill`, `id_type`, `multiplier`) VALUES
 (1, 1, 1, 0.5),
-(2, 1, 3, 1.3),
-(3, 2, 3, 1.2),
+(2, 1, 3, 1.5),
+(3, 2, 3, 2),
 (4, 3, 1, 1),
-(5, 3, 3, 0.5),
+(5, 3, 3, 1),
 (6, 4, 2, 2.2),
-(7, 5, 1, 3),
-(8, 6, 1, 1),
-(9, 6, 2, 0.4),
+(7, 5, 1, 4),
+(8, 6, 1, 0.5),
+(9, 6, 2, 2),
 (10, 7, 4, 3),
 (11, 8, 1, 1),
 (12, 8, 4, 0.8),
-(13, 9, 1, 1.5),
+(13, 9, 4, 1.5),
 (14, 10, 1, 1),
 (15, 11, 1, 1.5),
 (16, 12, 1, 1.8),
@@ -229,12 +219,10 @@ INSERT INTO `skill_type` (`id`, `id_skill`, `id_type`, `multiplier`) VALUES
 -- Structure de la table `type`
 --
 
-DROP TABLE IF EXISTS `type`;
-CREATE TABLE IF NOT EXISTS `type` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `label` varchar(256) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+CREATE TABLE `type` (
+  `id` int NOT NULL,
+  `label` varchar(256) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Déchargement des données de la table `type`
@@ -245,6 +233,86 @@ INSERT INTO `type` (`id`, `label`) VALUES
 (2, 'magic'),
 (3, 'faith'),
 (4, 'agility');
+
+--
+-- Index pour les tables déchargées
+--
+
+--
+-- Index pour la table `karacter`
+--
+ALTER TABLE `karacter`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `karacter_kategory`
+--
+ALTER TABLE `karacter_kategory`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `karacter_skill`
+--
+ALTER TABLE `karacter_skill`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `skill`
+--
+ALTER TABLE `skill`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `skill_type`
+--
+ALTER TABLE `skill_type`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `type`
+--
+ALTER TABLE `type`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `karacter`
+--
+ALTER TABLE `karacter`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT pour la table `karacter_kategory`
+--
+ALTER TABLE `karacter_kategory`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT pour la table `karacter_skill`
+--
+ALTER TABLE `karacter_skill`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT pour la table `skill`
+--
+ALTER TABLE `skill`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
+-- AUTO_INCREMENT pour la table `skill_type`
+--
+ALTER TABLE `skill_type`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+
+--
+-- AUTO_INCREMENT pour la table `type`
+--
+ALTER TABLE `type`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
